@@ -11,6 +11,7 @@ if [ -z "${user}" ] || [ -z "${password}" ] || [ -z "${address}" ] || [ -z "${fi
 else
   if curl --silent \
       --show-error \
+      --insecure \
       --ssl-reqd \
       --user "${user}:${password}" \
       --upload-file "${file}" \
