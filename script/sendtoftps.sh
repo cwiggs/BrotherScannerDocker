@@ -9,13 +9,9 @@ cd /scans
 if [ -z "${user}" ] || [ -z "${password}" ] || [ -z "${address}" ] || [ -z "${filepath}" ] || [ -z "${file}" ]; then
   echo "FTP environment variables not set, skipping inotify trigger."
 else
-  if curl --silent \
-      --show-error \
-      --insecure \
-      --ssl-reqd \
-      --user "${user}:${password}" \
-      --upload-file "${file}" \
-      "ftp://${address}${filepath}" ; then
+  if lftp -e "set ssl:verify-certificate no; cd "${filepath}"; mput "${file}"; quit" \
+    -u "${user}","${password}" \
+    "${address}" ; then
     echo "Uploading to ftp server ${address} successful."
   else
     echo "Uploading to ftp failed while using curl"

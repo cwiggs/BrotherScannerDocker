@@ -1,7 +1,20 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 RUN apt-get -y update && apt-get -y upgrade && apt-get -y clean
-RUN apt-get -y install sane sane-utils ghostscript netpbm x11-common- wget graphicsmagick curl ssh sshpass && apt-get -y clean
+
+RUN apt-get --yes install \
+  lftp \
+  sane \
+  sane-utils \
+  ghostscript \
+  netpbm \
+  x11-common- \
+  wget \
+  graphicsmagick \
+  curl \
+  ssh \
+  sshpass && \
+  apt-get -y clean
 
 RUN cd /tmp && \
 	wget https://download.brother.com/welcome/dlf105200/brscan4-0.4.11-1.amd64.deb && \
