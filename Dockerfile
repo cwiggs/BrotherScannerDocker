@@ -3,17 +3,18 @@ FROM ubuntu:18.04
 RUN apt-get -y update && apt-get -y upgrade && apt-get -y clean
 
 RUN apt-get --yes install \
+  curl \
+  ghostscript \
+  graphicsmagick \
   lftp \
+  netpbm \
+  ocrmypdf \
   sane \
   sane-utils \
-  ghostscript \
-  netpbm \
-  x11-common- \
-  wget \
-  graphicsmagick \
-  curl \
   ssh \
-  sshpass && \
+  sshpass \
+  wget \
+  x11-common- && \
   apt-get -y clean
 
 RUN cd /tmp && \
@@ -56,5 +57,4 @@ VOLUME /scans
 VOLUME /opt/brother/scanner/brscan-skey
 
 CMD /opt/brother/runScanner.sh
-
 

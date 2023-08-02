@@ -13,6 +13,8 @@ else
     -u "${user}","${password}" \
     "${address}" ; then
     echo "Uploading to ftp server ${address} successful."
+
+    #rm -f "${file}"
   else
     echo "Uploading to ftp failed while using curl"
     echo "user: ${user}"
