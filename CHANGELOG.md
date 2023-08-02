@@ -10,5 +10,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2023-08-01
 
 ### Changed
-- Upgrade to ubuntu 18.04
+- Upgrade to ubuntu 20.04
 - Use lftp instead of curl for uploading to ftps.
+- Use ocrmypdf to create a ocr pdf file when the ocr script is ran.

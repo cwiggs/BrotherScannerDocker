@@ -1,8 +1,8 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 RUN apt-get -y update && apt-get -y upgrade && apt-get -y clean
 
-RUN apt-get --yes install \
+RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get --yes install \
   curl \
   ghostscript \
   graphicsmagick \
@@ -14,7 +14,7 @@ RUN apt-get --yes install \
   ssh \
   sshpass \
   wget \
-  x11-common- && \
+  x11-common && \
   apt-get -y clean
 
 RUN cd /tmp && \
@@ -46,6 +46,10 @@ ENV FTP_PASSWORD=""
 ENV FTP_HOST=""
 # Make sure this ends in a slash.
 ENV FTP_PATH="/scans/" 
+
+# Set environment variables for ocrmypdf
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
 
 EXPOSE 54925
 EXPOSE 54921
