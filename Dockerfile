@@ -1,7 +1,21 @@
-FROM ubuntu:16.04
+FROM ubuntu:20.04
 
 RUN apt-get -y update && apt-get -y upgrade && apt-get -y clean
-RUN apt-get -y install sane sane-utils ghostscript netpbm x11-common- wget graphicsmagick curl ssh sshpass && apt-get -y clean
+
+RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get --yes install \
+  curl \
+  ghostscript \
+  graphicsmagick \
+  lftp \
+  netpbm \
+  ocrmypdf \
+  sane \
+  sane-utils \
+  ssh \
+  sshpass \
+  wget \
+  x11-common && \
+  apt-get -y clean
 
 RUN cd /tmp && \
 	wget https://download.brother.com/welcome/dlf105200/brscan4-0.4.11-1.amd64.deb && \
@@ -21,16 +35,21 @@ ENV IPADDRESS="192.168.1.123"
 ENV USERNAME="NAS"
 
 #only set these variables, if inotify needs to be triggered (e.g., for CloudStation):
-ENV SSH_USER="admin"
-ENV SSH_PASSWORD="admin"
-ENV SSH_HOST="localhost"
-ENV SSH_PATH="/path/to/scans/folder/"
+ENV SSH_USER=""
+ENV SSH_PASSWORD=""
+ENV SSH_HOST=""
+ENV SSH_PATH=""
 
 #only set these variables, if you need FTP upload:
-ENV FTP_USER="scanner"
-ENV FTP_PASSWORD="scanner"
-ENV FTP_HOST="ftp.mydomain.com"
-ENV FTP_PATH="/"
+ENV FTP_USER=""
+ENV FTP_PASSWORD=""
+ENV FTP_HOST=""
+# Make sure this ends in a slash.
+ENV FTP_PATH="/scans/" 
+
+# Set environment variables for ocrmypdf
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
 
 EXPOSE 54925
 EXPOSE 54921
@@ -42,5 +61,4 @@ VOLUME /scans
 VOLUME /opt/brother/scanner/brscan-skey
 
 CMD /opt/brother/runScanner.sh
-
 
