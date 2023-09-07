@@ -8,7 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ## [1.0.0] - 2023-08-01
+### Added
+- github actions that will publish the docker image to the github registry.
 
+### Changed
+- Cleanup dockerfile.
+- Move things from the cmd script in the dockerfile.
+- Move brother scanner scripts inside the image.
+
+## [1.1.0] - 2023-09-06
 ### Changed
 - Upgrade to ubuntu 20.04
 - Use lftp instead of curl for uploading to ftps.

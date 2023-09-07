@@ -1,8 +1,12 @@
 FROM ubuntu:20.04
 
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get -y update && apt-get -y upgrade && apt-get -y clean
 
-RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get --yes install \
+RUN apt-get --yes install \
   curl \
   ghostscript \
   graphicsmagick \
@@ -27,7 +31,9 @@ RUN cd /tmp && \
 	dpkg -i /tmp/brscan-skey-0.3.1-2.amd64.deb && \
 	rm /tmp/brscan-skey-0.3.1-2.amd64.deb
 
-ADD files/runScanner.sh /opt/brother/runScanner.sh
+ADD cmd.sh /opt/brother/cmd.sh
+
+ADD script /opt/brother/scanner/brscan-skey/script/
 
 ENV NAME="Scanner"
 ENV MODEL="MFC-L2700DW"
@@ -47,18 +53,11 @@ ENV FTP_HOST=""
 # Make sure this ends in a slash.
 ENV FTP_PATH="/scans/" 
 
-# Set environment variables for ocrmypdf
-ENV LC_ALL=C.UTF-8
-ENV LANG=C.UTF-8
-
 EXPOSE 54925
 EXPOSE 54921
 
 #directory for scans:
 VOLUME /scans
+RUN mkdir --parents /scans
 
-#directory for config files:
-VOLUME /opt/brother/scanner/brscan-skey
-
-CMD /opt/brother/runScanner.sh
-
+CMD /opt/brother/cmd.sh
