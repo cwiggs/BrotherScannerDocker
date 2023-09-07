@@ -49,5 +49,3 @@ rm /scans/"${date}".pdf
   "${FTP_HOST}" \
   "${FTP_PATH}" \
   "${output_ocr_pdf}"
-
-rm /scans/"${output_ocr_pdf}"
