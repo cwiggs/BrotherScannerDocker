@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.3.0] - 2023-08-01
+### Changed
+- Updated the github actions so it also works on tags.
+
 ## [1.2.0] - 2023-08-01
 ### Added
 - github actions that will publish the docker image to the github registry.
