@@ -39,6 +39,8 @@ ocrmypdf --rotate-pages \
   "/scans/${date}.pdf" \
   "/scans/${output_ocr_pdf}"
 
+rm /scans/"${date}".pdf
+
 /opt/brother/scanner/brscan-skey/script/trigger_inotify.sh "${SSH_USER}" "${SSH_PASSWORD}" "${SSH_HOST}" "${SSH_PATH}" "${output_ocr_pdf}"
 
 /opt/brother/scanner/brscan-skey/script/sendtoftps.sh \
@@ -47,3 +49,5 @@ ocrmypdf --rotate-pages \
   "${FTP_HOST}" \
   "${FTP_PATH}" \
   "${output_ocr_pdf}"
+
+rm /scans/"${output_ocr_pdf}"
