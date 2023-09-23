@@ -1,9 +1,13 @@
 #! /usr/bin/env bash
 set -e
 
-if ! adduser "${USERNAME}" --disabled-password --force-badname --gecos "" ; then
-  echo "failed to add user ${USERNAME}"
-  exit 1
+if ! id --user "${USERNAME}" &> /dev/null ; then
+  if ! adduser "${USERNAME}" --disabled-password --force-badname --gecos "" ; then
+    echo "failed to add user ${USERNAME}"
+    exit 1
+  fi
+else
+  echo "user ${USERNAME} already exists, skipping..."
 fi
 
 if ! chown --recursive "${USERNAME}:${USERNAME}" /scans ; then

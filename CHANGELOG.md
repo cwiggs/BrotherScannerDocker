@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.4.1] - 2023-09-23
+### Changed
+- Only add $USERNAME if the user doesn't exist.
+
 ## [v1.4.0] - 2023-08-01
 ### Changed
 - Updated the ocr script so it deletes all the files after it uploads them via ftps.
