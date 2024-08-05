@@ -13,9 +13,10 @@ device=$1
 date=$(date +%Y-%m-%d-%H-%M-%S)
 filename_base=/scans/$date"-page"
 output_file=$filename_base"%d.pnm"
+brother_scripts_dir=/opt/brother/scanner/brscan-skey/script
 
 # Import shell libraries
-source ./libs/error.sh
+source "${brother_scripts_dir}"/libs/error.sh
 
 # Check for required parameters
 if [ -z "${device}" ]; then
@@ -62,14 +63,14 @@ fi
 
 rm "${filename_base}.pdf"
 
-/opt/brother/scanner/brscan-skey/script/trigger_inotify.sh \
+"${brother_scripts_dir}"/trigger_inotify.sh \
   "${SSH_USER}" \
   "${SSH_PASSWORD}" \
   "${SSH_HOST}" \
   "${SSH_PATH}" \
   "${output_ocr_pdf}"
 
-/opt/brother/scanner/brscan-skey/script/sendtoftps.sh \
+"${brother_scripts_dir}"/sendtoftps.sh \
   "${FTP_USER}" \
   "${FTP_PASSWORD}" \
   "${FTP_HOST}" \
